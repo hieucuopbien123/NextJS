@@ -1,0 +1,14 @@
+-> NextJS là 1 React framework được tối ưu sẵn cho các website SSR, phát triển bởi Vercel.
+Mặc định dùng Typescript, có các cơ chế sẵn để làm data fetching, dynamic routing, sass,..
+
+Do cũng dùng JS như NodeJS nên khuyên sử dụng NodeJS với Express server(loại server phổ biến nhất) hơn là dùng các kiểu khác để làm server cho website
+
+Các module liên quan:
+React Hooks, Typescript, Redux, Express, MongoDB, Jsonwebtoken, Cookie, Search, Pagination, Handle Upload File, Avatar
+
+Tránh nhầm: về mặt loading là k tránh khỏi với SSR và CSR. Dev k thể cố làm cho CSR như SSR được vì browser nó làm tự động ở bước này:
+browser gửi request lấy html -> dữ liệu vô nghĩa k render luôn -> download JS + fetch API
+browser gửi request lấy html -> dữ liệu được server fetch API xong r nên có nghĩa dù k thực hiện được chức năng nhưng vẫn render luôn -> download JS event file
+Còn thực tế về mặt loading cũng kp là React hơn hẳn, thực tế nếu có nhiều data và trang web load lâu với lazy loading thì việc query tiếp từ server cũng mang lại tốc độ khá tốt. Nhược điểm k thể tránh khỏi của SSR là server phải xử lý nặng hơn.
+
+
