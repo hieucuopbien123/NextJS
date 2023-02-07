@@ -1,0 +1,19 @@
+# Optimization:
+-> TTI và FID
+URL: https://pagespeed.web.dev/ giúp đo lượng tốc độ của trang web và các thông số giống tool light house
+TTI là Time To Interactive và FID là First Input Delay là 2 chỉ số quan trọng để user tương tác với website
+
+Khi có 1 page landing page dài viết bằng nextjs thì khi gõ url r ấn enter: 
+1) HTML được load xuống browser sau khi server chạy SSR xong
+2) JS được tải xuống browser r thực thi
+3) JS chạy xong sẽ gắn đống event vào cây DOM => web đã được load đầy đủ
+=> Bước 2 và 3 (là 2 bước hydrate JS) khiến cho TTI và FID cao khiến web tuy được mở ra nhưng người dùng vẫn chờ lâu mới tương tác được.
+
+Mặc định next nó luôn tuân thủ 3 bước đó. Nhưng thực tế, trong TH trang landing page toàn component tĩnh ít tương tác với user hoặc có tương tác nhưng ít khi người dùng tương tác mà ta muốn chơi kiểu "chỉ khi component đó hiển thị ra cho user thì mới cần hydrate để tương tác được JS" thì vẫn có thể optimize được:
+
+Thư viện react-hydration-on-demand giúp mọi phần code JS vẫn được download và parsed ở bước 2 như bth nhưng đến bước 3 chỉ thực hiện khi component đó visible trên màn hình
+Còn thư viện next-lazy-hydrate giúp cả phần download và parsed và executed JS chỉ thực hiện khi component visible nên nó chuẩn hơn.
+=> Người dùng tương tác sẽ lâu hơn 1 tí ở trang landing page nhưng tốc độ load trang và performance rất nhanh. Tuy nhiên 2 thư viện này đều chỉ dùng cho React 17 và Next v1 nên k sử dụng được
+
+
+

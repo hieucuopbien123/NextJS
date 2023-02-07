@@ -19,13 +19,14 @@ Mỗi khi 1 client vào trang, server sẽ chạy qua tất cả 1 lần để s
 Như ta đã biết thì React thuần là CSR, nó kp SSG vì nó realtime còn SSG cache rất mạnh và k realtime như v(dù dùng gatsby có thể tùy chỉnh hết), SSG thì phải fetch sẵn 1 phần data render từ lúc build(phía client của nó chỉ cần fetch 1 tí thôi), còn React nó có mỗi cục root, k hề fetch trước mà về browser r fetch cả đống. Dù k là SSG nhưng nó vẫn là 1 static website nên gọi là CSR static website cho đỡ nhầm với SSG. SSG có 2 điểm đáng chú ý nhất là cache k realtime và client tự fetch điền vào chỗ trống nhưng 1 phần được fetch trước.
 
 Nếu ta dùng NextJS mặc định thì nó là Universal SSR hay k xét phần client request thì coi là SSR ok, mặc định nó gửi cho ta phần text có chỗ trống và client vẫn phải tự xử lý fill chỗ trống đó. 
-Nếu ta export file thành HTML và host lên firebase thì nó là SSG vì nó fetch trước data thành nhiều page html rồi k cần server vẫn chạy được, file html fix cứng k đổi, fetch trước data 1 phần nhờ getInitialProps or getStaticProps
+Nếu ta export file thành HTML và host lên firebase thì nó là SSG vì nó fetch trước data thành nhiều page html rồi k cần server vẫn chạy được, file html fix cứng k đổi, fetch trước data 1 phần nhờ getInitialProps or getStaticProps => SSR k dùng firebase vì nó fetch trước r fix cứng phần fetch ở server luôn
 
 => Éo cần biết mẹ gì nhưng ta có thể tùy biến theo ý mình dù là Universal SSR hay SSG chơi được hết.
 Thực tế tất cả type dự án, ta đều có thể code fetch API bên trong component để lấy data gán vào, tức là 1 phần CSR đó => mặc định là như v nhưng ta tự hiểu k nhắc lại.
 
 Có thể deploy trên Vercel platform chuẩn cho NextJS(trong docs) or deploy trên firebase như 1 static website CSR bth.
-=> Refer tới "Firebase / Hosting" để host web static SSG. Còn để host website SSR, ta phải dùng 1 express server cho frontend(NextJS có sẵn), sau đó host cái server đó trên nền tảng khác như là heroku chẳng hạn. 
+=> Dùng firebase để host web static SSG. Còn để host website SSR, ta phải dùng 1 express server cho frontend(NextJS có sẵn), sau đó host cái server đó trên nền tảng khác như là heroku chẳng hạn.
+ref tới "# Firebase / NextJS hosting"
 
 => Refer tới "# SSR của NextJS"
 
@@ -170,6 +171,9 @@ VD: truy cập vào http://localhost:3000/robots.txt được sau khi tạo xong
 
 Cung <Image> giúp tối ưu hóa hình ảnh. VD ảnh 2000x2000 nhưng trên màn hình mobile, ta chỉ cần tải kích thước 100x100 pixel là đủ rồi thì sẽ giảm tải vc load ảnh, giúp tăng performace. Nó cũng tự động lazy loading, preloading xác định kích thước ảnh tương ứng với thiết bị.
 Có thể chỉnh sửa trong file next.config.js về images như deviceSizes or imageSizes sẽ override defautlt behavior => ít dùng, refer trong docs
+
+Dùng Image của next/Image tuy cái khó chịu là ép có width và height nhưng lại chạy được các tính năng: placeholder, blurDataURL, onError giúp hiển thị image khi có lỗi và hiển thị image placeholder khi loading. Nó thay thế hoàn toàn thẻ img của html thuần
+Có thư viện plaiceholder giúp tạo blur image placeholder dynamic cho mọi ảnh nhưng sử dụng với next có vẻ k ổn
 
 
 
@@ -383,11 +387,12 @@ Disable nó với useFileSystemPublicRoutes: false => client route có thể v�
 Để expose to browser biến môi trường, phải dùng tiền tố NEXT_PUBLIC_ đằng trước 
 
 -> Thông thường, file .env*.local luôn được để trong gitignore. Ta dùng thuận tiện 2 môi trường với .env.development.local và .env.production.local, còn .env.local dùng với mọi môi trường. Còn môi trường test nữa nhưng k xét
-=> truy xuất bằng .env.$(NODE_ENV).local với package cross-env (cross-env có thể chạy trực tiếp trên command nếu cài -g)
+=> truy xuất bằng .env.$(NODE_ENV).local với package cross-env (cross-env có thể chạy trực tiếp trên command nếu cài -g). Điều đặc biệt là khi dùng NODE_ENV, next tự động dùng đúng file .env developement hoặc production mà ta k cần set gì thêm 
 
 Còn các file như .env (all environments), .env.development (development environment bằng next dev), and .env.production (production environment bằng next start) được dùng để set giá trị default cho các biến .env và thường k cần cho vào .gitignore luôn
 => .env.local always overrides the defaults set.
 
+VD: Tức file .env lưu giá trị mặc định cho biến môi trường, .env.development lưu giá trị mặc định cho biến môi trường development, .env.development.local lưu giá trị ta set cho biến môi trường development nhưng được bảo mật
 
 
 # Dùng next.config.js
@@ -418,6 +423,8 @@ Dùng React Context để lưu data share between mọi components nhưng bắt 
 -> Dùng redux làm global state store chỉ khi ứng dụng có nhiều global state mà React Context quá lớn. Thg thì ta ưu tiên React Context cho global state đồng bộ, React Query cho global state bất đồng bộ.
 => ref tới "Dùng redux-toolkit"
 
+-> Redux toolkit và Zustand đều là 2 state management rất mạnh nhưng Zustand nhẹ hơn, code cũng dễ và gọn hơn
+
 
 
 # Các thư viện UI mạnh
@@ -442,6 +449,10 @@ Darkmode: ok
 Set up các tool tương tự như reactjs
 Setup thêm các thứ như postcss, cssnano, autoprefixer, chakra ui, tailwind, tsconfig.json, next.config.js
 Setup dùng ảnh thoải mái, setup react context, font chữ, style global, các loại env, cấu trúc thư mục và đường dẫn, set up các file 404 500 _document, thư mục utils, SEO, theme mode, static file.
+
+
+
+# Optimization
 
 
 

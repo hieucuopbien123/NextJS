@@ -3,14 +3,13 @@
 // # Style
 // Next cũng hỗ trợ sẵn styled-components
 
-import { Inter } from '@next/font/google'
 import Link from 'next/link'
+import CustomImage from './components/CustomImage';
 import styles from './page.module.css'
-import { Tab, TabBody, TabContainer, TabHead } from './StyleComponent'
-
-const inter = Inter({ subsets: ['latin'] })
+import { Tab, TabBody, TabContainer, TabHead } from './StyleComponent';
 
 export default function Home() {
+
   return (
     <main className={styles.main}>
       <TabContainer>
@@ -28,6 +27,8 @@ export default function Home() {
         </TabHead>
         <TabBody />
       </TabContainer>
+      
+      <CustomImage/>
     </main>
   )
 }
