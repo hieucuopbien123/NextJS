@@ -432,6 +432,7 @@ Dùng React Context để lưu data share between mọi components nhưng bắt 
 Setup tailwind config rồi dùng trực tiếp bth
 
 Trong tailwind có nhiều utility class giúp animation: https://tailwindcss.com/docs/animation
+=> ref tới "Projects / Thena-Frontend"
 
 -> Dùng chakra ui: Khi dùng 1 thư viện UI, cần đảm bảo biết làm các thao tác
 Set được CSS Reset global style: ok
@@ -453,6 +454,13 @@ Setup dùng ảnh thoải mái, setup react context, font chữ, style global, c
 
 
 # Optimization
+
+
+
+# Hosting vercel
+Vercel giúp hosting app react nextjs đủ kiểu, phải trả phí mới dùng được thực tế và chịu tải được lượng user lớn. Có thể connect với github tạo CI/CD
+
+Chú ý deploy vercel phải đúng phiên bản. Nếu ứng dụng chạy React16 và dùng node phiên bản 16 chẳng hạn thì khi deploy phải chỉnh trong setting của project vercel xuống đúng v16 mới được.
 
 
 

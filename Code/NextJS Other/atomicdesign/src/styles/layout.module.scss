@@ -1,0 +1,13 @@
+.layoutContainer {
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1.6rem;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+}
