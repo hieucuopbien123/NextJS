@@ -454,6 +454,8 @@ Setup dùng ảnh thoải mái, setup react context, font chữ, style global, c
 
 
 # Optimization
+-> NextJS tự động xác định page static và thực hiện Automatic Static Optimization. Nó generatte sẵn static page và chỉ cần dùng. Điều này được thực hiện nếu k có getServerSideProps và getInitialProps. 
+=> Đây là lý do getStaticProps được dùng nhiều hơn getInitialProps
 
 
 
