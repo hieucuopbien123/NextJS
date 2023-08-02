@@ -6,6 +6,8 @@ NextJS
 -> Cài: VSC, NodeJS, NPM, YARN
 npx create-next-app firstapp
 
+Có thể dùng manual setup trong docs tự code mọi thứ
+
 Chạy app có 3 cách cơ bản nhất:
 1) npm run build + npm run start => nó build từng page sẵn ra dạng HTML và lệnh start sẽ chạy 1 server, server này serve file html có route tuân theo cấu trúc thư mục. Là kiểu chạy chuẩn.
 2) npm run dev => nó k build ra html sẵn, kiểu này ta có thể hiểu là để test cho nhanh chứ chả có ý nghĩa gì sất. Khi phân tích về loại web SSR CSR phải dùng lệnh build + start cơ
@@ -395,6 +397,7 @@ Còn các file như .env (all environments), .env.development (development envir
 VD: Tức file .env lưu giá trị mặc định cho biến môi trường, .env.development lưu giá trị mặc định cho biến môi trường development, .env.development.local lưu giá trị ta set cho biến môi trường development nhưng được bảo mật
 
 
+
 # Dùng next.config.js
 trailingSlash
 basePath là set tự động có url prefix ở trước, mặc định là rỗng. VD: basePath: '/docs' thì <Link href="/about"> sẽ cho ra <a href="/docs/about">
@@ -443,6 +446,9 @@ Animation keyframe cũng như css selector được => k hỗ trợ mạnh, có 
 Darkmode: ok
 
 -> Dùng autoprefixer, cssnano, postcss
+
+-> Thư viện daisy: thư viện component mạnh của tailwind
+URL: https://daisyui.com/docs/install/
 
 
 
