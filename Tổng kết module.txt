@@ -277,6 +277,19 @@ Do SSR chậm hơn SSG nên chỉ dùng khi cần thiết
 Cái getStaticProps k truy cập được vào biến request và response ở trong hàm nhưng getServerSideProps thì ok
 Khi dùng SSR, nó k build trước html ở build time như SSG và luôn regenerate lại ở mọi request nên k cần lưu lại html trong server như SSG
 
+--> Giải quyết vđ nếu 1 page fetch lần đầu data lớn gây loading lâu. Mà để chuẩn SEO thì phải dùng SSR. Mà như thế thì mỗi lần vào page, server đều fetch chạy lại getServerSideProps rất tốn. Có nhiều cách fix tùy TH:
+Có thể dùng CSR thuần riêng cho nó vì giả sử có 1000 items thì việc SEO cho cả 1000 items rất hiếm khi xảy ra, nếu các item giống nhau thì k cần thiết, nếu các items khác nhau thì SEO rất tạp nham chả vào chủ đề gì. Do đó có thể fix thẻ meta cho page đó, còn lại list data fetch dùng CSR.
+getStaticProps + ISR revalidate tầm 60s cho pages đó vì sẽ k có nh sự thay đổi. Thg thì data thay đổi nhiều mà SEO tất cả thì rất khó xảy ra vì SEO k có ý nghĩa. Nếu dynamic data + SEO cả page 1 lần thì chỉ có getServerSideProps chịu load lâu thôi
+Chia page, 1 cách để SEO tất cả là phân trang, mỗi trang là 1 router khác nhau thì SEO cho cả trang được, lượng data giảm nên fetch nhanh
+
+VD: Ta lấy 1 list data lớn và dùng filter data đó cho từng page
+Giải pháp khi code server nên tối ưu cho phép người dùng chọn số lượng lấy (tất cả hay lấy vài items), cho phép thêm các tham số filter (bất kể dù api này có lấy tất cả hay không để tăng tính tái sử dụng)
+Khi đó client side có thể tận dụng SSR fetch vài data đầu tiên trong list cho SEO, còn CSR sẽ fetch tất cả data như bth
+
+=> Cách 1 thật ra k tệ vì ta k fetch detail mà chỉ fetch qua tên và type thôi nên tốc độ nhanh vì số lượng collection cũng k có nhiều 
+
+Ta chơi kiểu: data.length <= 0 tức k có gì thì in ra empty box, data có thì in ra data. Nhưng nếu lần đầu tiên vào quá nhanh và nó nảy empty box r nhảy cóc hiện data rất k ổn => do đó người ta thg set trạng thái ban đầu của data là undefined chứ kp là [] để tránh các lỗi tiềm năng
+
 --> Dùng với dynamic params
 
 => 1 ứng dụng có thể kết hợp nhiều kiểu: VD 1 pages dùng SSG(generate as static HTML+JSON dùng getStaticProps vì phần data lấy từ getStaticProps được lưu vào file json), 1 page dùng ISR, 1 page dùng SSR, 1 page Static(chỉ có static HTML, k dùng getStateProps), 1 page dùng CSR (client fetching) ok hết => xem khi build ra có ký hiệu rõ route nào dùng kiểu nào
