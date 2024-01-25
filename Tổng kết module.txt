@@ -496,4 +496,7 @@ Trong VSC có thể chỉnh được dùng PowerShell hay Git bash trong termina
 
 -> Series dừng (đi từ từ): https://www.youtube.com/watch?v=9P8mASSREYM&list=PLC3y8-rFHvwgC9mj0qv972IO5DmD-H0ZH, https://nextjs.org/learn/, nextjs example, https://www.youtube.com/watch?v=FTjtG3G86KY&list=PLB_Wd4-5SGAbcvGsLzncFCrh-Dyt7wr5F 
 
+-> Supabase là một nền tảng cung cấp Backend dưới dạng Dịch vụ (BaaS) cho các nhà phát triển ứng dụng. Nó được xây dựng dựa trên các công cụ mã nguồn mở và có mục tiêu cạnh tranh với Firebase của Google. 
+Supabase cung cấp các dịch vụ đám mây như cơ sở dữ liệu, xác thực, lưu trữ, không máy chủ và thời gian thực. Nó cho phép các nhà phát triển tạo ra các ứng dụng nhanh chóng và dễ dàng mà không cần quan tâm nhiều đến hạ tầng và cơ sở dữ liệu
+
 
